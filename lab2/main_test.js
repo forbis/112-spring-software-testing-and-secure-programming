@@ -47,11 +47,13 @@ test('Test Application : selectNextPerson()', async (test) => {
     const names = await app.getNames();
     test.mock.method(Math, 'random', () => 0);
     assert.strictEqual(app.selectNextPerson(), 'alpha');
+    assert.deepStrictEqual(app.selected, ['alpha']);
     test.mock.method(Math, 'random', () => 0.4);
     assert.strictEqual(app.selectNextPerson(), 'beta');
+    assert.deepStrictEqual(app.selected, ['alpha', 'beta']);
     test.mock.method(Math, 'random', () => 0.7);
     assert.strictEqual(app.selectNextPerson(), 'gama');
-
+    assert.deepStrictEqual(app.selected, ['alpha', 'beta', 'gama']);
 });
 
 test('Test Application : notifySelected()', async (test) => {
