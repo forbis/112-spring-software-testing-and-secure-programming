@@ -47,14 +47,13 @@ test('Test Application : getRandomPerson()', async (test) => {
 test('Test Application : selectNextPerson()', async (test) => {
     const app = new Application();
     const names = await app.getNames();
+    app.selected = ['alpha'];
     let cnt = 0;
     test.mock.method(app, 'getRandomPerson', () => {
         if (cnt <= names.length) { 
             return names[0][cnt++]; 
         }
     });
-    assert.strictEqual(app.selectNextPerson(), 'alpha');
-    assert.deepStrictEqual(app.selected, ['alpha']);
     assert.strictEqual(app.selectNextPerson(), 'beta');
     assert.deepStrictEqual(app.selected, ['alpha', 'beta']);
     assert.strictEqual(app.selectNextPerson(), 'gama');
@@ -64,6 +63,7 @@ test('Test Application : selectNextPerson()', async (test) => {
 
 test('Test Application : notifySelected()', async (test) => {
     const app = new Application();
+    app.people = ['alpha', 'beta', 'gama'];
     app.selected = ['alpha', 'beta', 'gama'];
     app.mailSystem.send = test.mock.fn(app.mailSystem.send);
     app.mailSystem.write = test.mock.fn(app.mailSystem.write);
