@@ -56,6 +56,7 @@ test('Test Application : selectNextPerson()', async (test) => {
     test.mock.method(Math, 'random', () => 0.7);
     assert.strictEqual(app.selectNextPerson(), 'gama');
     assert.deepStrictEqual(app.selected, ['alpha', 'beta', 'gama']);
+    assert.strictEqual(app.selectNextPerson(), null);
 });
 
 test('Test Application : notifySelected()', async (test) => {
