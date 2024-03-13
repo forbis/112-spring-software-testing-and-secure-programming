@@ -49,7 +49,7 @@ test('Test Application : selectNextPerson()', async (test) => {
     const names = await app.getNames();
     let cnt = 0;
     test.mock.method(app, 'getRandomPerson', () => {
-        if cnt <= names.length { 
+        if (cnt <= names.length) { 
             return names[0][cnt++]; 
         }
     });
