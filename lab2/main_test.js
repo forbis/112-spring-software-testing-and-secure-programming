@@ -13,6 +13,8 @@ const { Application, MailSystem } = require('./main');
 test('Test MailSystem : write()', () => {
     const ms = new MailSystem();
     assert.strictEqual(ms.write('alpha'), 'Congrats, alpha!');
+    assert.strictEqual(ms.write(null), 'Congrats, null!');
+    assert.strictEqual(ms.write(48763), 'Congrats, 48763!');
 });
 
 test('Test MailSystem : send()', () => {
@@ -58,13 +60,7 @@ test('Test Application : selectNextPerson()', async (test) => {
 
 test('Test Application : notifySelected()', async (test) => {
     const app = new Application();
-    const names = await app.getNames();
-    test.mock.method(Math, 'random', () => 0);
-    assert.strictEqual(app.selectNextPerson(), 'alpha');
-    test.mock.method(Math, 'random', () => 0.4);
-    assert.strictEqual(app.selectNextPerson(), 'beta');
-    test.mock.method(Math, 'random', () => 0.7);
-    assert.strictEqual(app.selectNextPerson(), 'gama');
+    app.selected = ['alpha', 'beta', 'gama'];
     app.mailSystem.send = test.mock.fn(app.mailSystem.send);
     app.mailSystem.write = test.mock.fn(app.mailSystem.write);
     app.notifySelected();
