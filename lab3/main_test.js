@@ -10,7 +10,7 @@ describe("Calculator Test", () => {
             { param: 1, expected: Math.exp(1) },
             { param: 0, expected: Math.exp(0) },
             { param: -1, expected: Math.exp(-1) },
-            { param: '0', expected: Error, msg: "unsupported operand type" },
+            { param: 'c8763', expected: Error, msg: "unsupported operand type" },
             { param: Infinity, expected: Error, msg: "unsupported operand type" },
             { param: Math.MAX_VALUE, expected: Error, msg: "overflow" },
         ];
@@ -28,8 +28,9 @@ describe("Calculator Test", () => {
     it("Calculator.log() Test", () => {
         let logTestcase = [
             { param: 1, expected: Math.log(1) },
-            { param: '1', expected: Error, msg: "unsupported operand type" },
+            { param: 'c8763', expected: Error, msg: "unsupported operand type" },
             { param: Infinity, expected: Error, msg: "unsupported operand type" },
+            { param: -Infinity, expected: Error, msg: "unsupported operand type" },
             { param: 0, expected: Error, msg: "math domain error (1)" },
             { param: -1, expected: Error, msg: "math domain error (2)" },
         ];
